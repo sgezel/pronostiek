@@ -1,0 +1,78 @@
+.login-form{
+	padding-top: 25px;
+	margin: 0 auto;
+}
+
+table
+{
+	width:100%;
+	margin-bottom: 30px;
+	background-color: white;
+}
+
+.header
+{
+	background: #D4886A;
+	color: #fff;
+	font-size: 20pt;
+}
+
+.subheader
+{
+	color:#000;
+	background: #FFc2aa;
+}
+
+body
+{
+	background: url('https://images.freecreatives.com/wp-content/uploads/2016/01/Seamless-Grass-Texture-For-Free-Download-480x321.jpeg');
+}
+
+h1
+{
+	color: #fff;
+	background: #aa5939;
+}
+
+h2
+{
+	color: #aa5939;
+}
+
+.vraag:nth-child(even) {background: #eee;}
+
+#pronostiek input[type="number"]{
+	width:40px;
+	text-align: center;
+}
+
+#bonus input
+{
+	width:100%;
+}
+
+input:read-only{
+	background-color: #ddd;
+}
+
+.right
+{
+	float:right;
+}
+
+.left
+{
+	float:left;
+}
+
+.nowrap
+{
+
+white-space: nowrap;
+}
+
+.wit{
+	background: #fff;
+	margin:10px;
+	padding:10px;
+}
