@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-lg-12">
 
-        	<h1>Reglement der de Premedianen voor deelname aan de Pr(emed)onostiek.</h1>
+        	<h1>Reglement der Premedianen voor deelname aan de Pr(emed)onostiek.</h1>
         	<div class="wit">
         	<p>
         		<h2>Vorige editie</h2>
