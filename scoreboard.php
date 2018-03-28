@@ -1,5 +1,7 @@
-<?php 
+<?php
 session_start();
+if(!isset($_SESSION["data"]) && isset($_SESSION["user"]))
+	header("location: /");
 ?>
 <?php include("header.php"); ?>
 
