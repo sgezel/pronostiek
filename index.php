@@ -73,7 +73,7 @@
                 $data = file_get_contents("data/vragen.json");
                 $json = json_decode($data, true);
 
-                $datetime1 =  DateTime::createFromFormat('Y-m-d H:i:s', '2018-03-25 17:00:00'); //new DateTime('13/06/2018 17:00');
+                $datetime1 =  DateTime::createFromFormat('Y-m-d H:i:s', '2018-04-01 17:00:00'); //new DateTime('13/06/2018 17:00');
                 
                 $datetime2 = new DateTime('NOW');
 
@@ -86,22 +86,22 @@
              <table border=1 id="bonus">
                <?php foreach($json as $vragen): ?>
                 <tr>
-                  <td colspan="3" class="header"><?= $vragen["naam"]; ?></td>
+                  <td colspan="6" class="header"><?= $vragen["naam"]; ?></td>
                 </tr>
 
                 <tr>
-                  <td class="subheader">vraag</td>
+                  <td class="subheader" colspan="3">vraag</td>
                   <td class="subheader">antwoord</td>
                   <td class="subheader">score</td>
                 </tr>
 
                 <?php foreach($vragen["vragen"] as $vraag): ?>
                   <tr class="vraag">
-                      <td>
+                      <td  colspan="3">
                           <?= $vraag["Vraag"]; ?>
                       </td>
                       <td>                          
-                          <input type="text" name="vraag_<?= $vraag['id']; ?>" value="<?= isset($_SESSION["data"]["vragen"]["vraag_".$vraag['id']]) ? $_SESSION["data"]["vragen"]["vraag_".$vraag['id']] : ""  ?>" <?= $vragenlocked ? "readonly" : "" ?> />
+                          <input type="text" name="vraag_<?= $vraag['id']; ?>" value="<?= isset($_SESSION["data"]["vragen"]["vraag_".$vraag['id']]) ? $_SESSION["data"]["vragen"]["vraag_".$vraag['id']] : ""  ?>" <?= $vragenlocked ? "readonly" : "" ?>  class="<?= $vragenlocked ? "disabled" : "" ?>" />
                       </td>
                       <td>
                         <?=  (isset($_SESSION["data"]["bonus"]) && isset($_SESSION["data"]["bonus"]["vraag_".$vraag['id']])) ? $_SESSION["data"]["bonus"]["vraag_".$vraag['id']] : "0"; ?>
@@ -122,11 +122,11 @@
            
              <?php foreach($json as $group): ?>
               <tr>
-                  <td colspan="6" class="header"><?= $group["naam"]; ?></td>
+                  <td colspan="8" class="header"><?= $group["naam"]; ?></td>
               </tr>
               <tr>
                 <td class="subheader">datum + tijd</td>
-                <td colspan=3 class="subheader">pronostiek</td>
+                <td colspan=5 class="subheader">pronostiek</td>
                 <td class="subheader">eindstand</td>
                 <td class="subheader">score</td>
             </tr>
@@ -135,21 +135,26 @@
                     $thuis = str_replace(" ",  "_",$group["naam"]).'_'.str_replace(" ",  "_",$match['thuis']).'_' . str_replace(" ",  "_",$match['uit']).'_t';
                     $uit = str_replace(" ",  "_",$group["naam"]).'_'.str_replace(" ",  "_",$match['thuis']).'_' . str_replace(" ",  "_",$match['uit']).'_u';  
 
+                    $vlag_thuis = file_exists("vlaggen/" . $match["thuis"] . ".png") ? "vlaggen/" . $match["thuis"] . ".png" : "vlaggen/default.png";
+                    $vlag_uit =  file_exists("vlaggen/" . $match["uit"] . ".png") ? "vlaggen/" . $match["uit"] . ".png" : "vlaggen/default.png";
+
                     $punten =  $group["naam"].'_'.str_replace(" ",  "_",$match['thuis']).'_' . str_replace(" ",  "_",$match['uit']);
                     ?>
                     <tr class="vraag">
 
                       <td> <?= $match["datum"]; ?></td>
-                      <td class="nowrap"> <img class="right" src="vlaggen/<?= $match["thuis"]; ?>.png"/><?= $match["thuis"]; ?></td>
+                      <td class="nowrap"><?= $match["thuis"]; ?></td>
+                      <td> <img class="" src="<?= $vlag_thuis; ?>"/></td>
                       <td class="nowrap">
                         <?php 
                             $pronolocked = (DateTime::createFromFormat('d/m/Y H:i', $match["datum"]) < (new DateTime('NOW'))->add(new DateInterval('PT1H')));
                           ?>
-                          <input type="number" name="<?= $thuis ?>" value="<?= isset($_SESSION["data"]["scores"][$thuis]) ? $_SESSION["data"]["scores"][$thuis] : ""  ?>" <?= $pronolocked ? "readonly" : "" ?>/> 
+                          <input type="number" name="<?= $thuis ?>" value="<?= isset($_SESSION["data"]["scores"][$thuis]) ? $_SESSION["data"]["scores"][$thuis] : ""  ?>" <?= $pronolocked ? "readonly" : "" ?>  class="<?= $pronolocked ? "disabled" : "" ?>"  /> 
                           - 
-                          <input type="number" name="<?= $uit ?>" value="<?= isset($_SESSION["data"]["scores"][$uit]) ? $_SESSION["data"]["scores"][$uit] : ""  ?>" <?= $pronolocked ? "readonly" : "" ?>/>
+                          <input type="number" name="<?= $uit ?>" value="<?= isset($_SESSION["data"]["scores"][$uit]) ? $_SESSION["data"]["scores"][$uit] : ""  ?>" <?= $pronolocked ? "readonly" : "" ?>  class="<?= $pronolocked ? "disabled" : "" ?>" />
                       </td>
-                     <td class="nowrap"><img class="left" src="vlaggen/<?= $match["uit"]; ?>.png"/> <?= $match["uit"]; ?> </td>
+                       <td> <img class="" src="<?= $vlag_uit; ?>"/></td>
+                     <td class="nowrap"> <?= $match["uit"]; ?> </td>
                       <td><?= $match["thuis_goals"]; ?> - <?= $match["uit_goals"]; ?></td>
                       <td><?= isset($_SESSION["data"]["points"][$punten]) ? $_SESSION["data"]["points"][$punten] : "" ?></td>
                     </tr>
@@ -158,7 +163,7 @@
                <?php endforeach; ?>
              <?php endforeach; ?>
               <tr>
-                <td colspan="6" class="subheader"><input type="submit" value="opslaan"  class="btn btn-success" /></td>
+                <td colspan="8" class="subheader"><input type="submit" value="Opslaan"  class="btn btn-success" /></td>
               </tr>
             </table>
           </form>
