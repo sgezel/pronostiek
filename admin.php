@@ -109,16 +109,18 @@ if(!isset($_SESSION["data"]["admin"]) && $_SESSION["data"]["admin"]!=true)
     ?>
 
     <table border=1>
-     <tr>
-       <td>Gebruiker</td>
-       <td>Vraag</td>
-       <td>Antwoord</td>
-       <td>Correct?</td>
-     </tr>
+     
      <?php foreach($vragen as $user => $data): ?>
+      <tr>
+         <td class="header" colspan="3"><?= $user; ?></td>
+      </tr>
+      <tr>
+       <td class="subheader">Vraag</td>
+       <td class="subheader">Antwoord</td>
+       <td class="subheader">Correct?</td>
+     </tr>
       <?php foreach($data["vragen"] as $vraagid => $antwoord): ?>
         <tr>
-          <td><?= $user; ?></td>
           <td><?= $vraagzinnen[$vraagid]; ?></td>
           <td><?= $antwoord; ?></td>
           <td><input type="checkbox" name="antwoorden[<?= $data["username"]; ?>][<?= $vraagid; ?>]" <?=  isset($bonusvragenjuist[$data["username"]][$vraagid]) ? "checked" : "" ?> /></td>
