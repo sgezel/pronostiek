@@ -1,4 +1,5 @@
 <?php 
+  include("config.php");
   $logged_in = false;
 
   if(isset($_SESSION["user"]) && $_SESSION["user"] !== "")
@@ -13,6 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
+	<link rel="icon" href="img/icon.ico" type="image/x-icon">
 
     <title>Pr(emed)onostiek</title>
 
@@ -42,7 +45,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Pr(emed)onostiek</a>
+        <a class="navbar-brand" href="#"><img src="img/logo.png" class="logo" /> Pr(emed)onostiek</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
