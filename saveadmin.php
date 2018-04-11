@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("config.php");
 
 if(isset($_POST["reset_all_data"]) && isset($_POST["verification"]))
 {
@@ -138,7 +139,7 @@ else
 						foreach ($vraag as $id => $correct) {
 							if($correct == "on")
 							{
-								$bonuspunten = 2;
+								$bonuspunten = $config["bonuspoints"];
 								$bonus += $bonuspunten;
 								$userbonus [$id] = $bonuspunten;
 							}						
