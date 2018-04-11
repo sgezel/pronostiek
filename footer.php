@@ -2,7 +2,7 @@
       <div class="container">
       	<span class="left">
       		&copy; Sandor Gezel & Dieter Cams <?= date("Y"); ?>
-          versie 1.1 <?= $version; ?>
+          versie <?= $config["version"]; ?>
       	</span>
 
       	<span class="right">
