@@ -28,6 +28,7 @@
       <?php endif; ?>
 
       <div class="row wit">
+        <?php if($config["enable_login"]): ?>
        <form class="login-form" action="login.php" method="post">
          <h1>Inloggen</h1>
         <div class="form-group">
@@ -40,8 +41,8 @@
         </div>        
         <button type="submit" class="btn btn-primary">Inloggen</button>
       </form>
-
-        
+      <?php endif; ?>
+      <?php if($config["enable_registrations"]): ?>
        <form class="login-form" action="register.php" method="post">
        <h1>Registreren</h1>
         <div class="form-group">
@@ -58,6 +59,7 @@
         </div>        
         <button type="submit" class="btn btn-primary">Registreren</button>
       </form>
+       <?php endif; ?>
       </div>
     </div>
      <?php endif; ?>
@@ -73,7 +75,7 @@
                 $data = file_get_contents("data/vragen.json");
                 $json = json_decode($data, true);
 
-                $datetime1 =  DateTime::createFromFormat('Y-m-d H:i:s', '2018-04-01 17:00:00'); //new DateTime('13/06/2018 17:00');
+                $datetime1 =  DateTime::createFromFormat('Y-m-d H:i:s', $config["question_close_time"]); //new DateTime('13/06/2018 17:00');
                 
                 $datetime2 = new DateTime('NOW');
 
@@ -147,7 +149,7 @@
                       <td> <img class="" src="<?= $vlag_thuis; ?>"/></td>
                       <td class="nowrap">
                         <?php 
-                            $pronolocked = (DateTime::createFromFormat('d/m/Y H:i', $match["datum"]) < (new DateTime('NOW'))->add(new DateInterval('PT1H')));
+                            $pronolocked = (DateTime::createFromFormat('d/m/Y H:i', $match["datum"]) < (new DateTime('NOW'))->add(new DateInterval('PT'. $config["close_answer_before_match"] . 'H')));
                           ?>
                           <input type="number" name="<?= $thuis ?>" value="<?= isset($_SESSION["data"]["scores"][$thuis]) ? $_SESSION["data"]["scores"][$thuis] : ""  ?>" <?= $pronolocked ? "readonly" : "" ?>  class="<?= $pronolocked ? "disabled" : "" ?>"  /> 
                           - 
