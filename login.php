@@ -1,4 +1,5 @@
 <?php
+	session_set_cookie_params(604800);
 	session_start();
 
 	$_SESSION["login"]["message"] = "Gebruikersnaam of wachtwoord incorrect.";
@@ -22,11 +23,9 @@
 					$_SESSION["user"] = $userdata["username"];
 					$_SESSION["login"]["message"] = "";
 					$_SESSION["data"] = $userdata;
-				}
+				}	
 				
-				
-			}
-			
+			}			
 				
 		}
 	}

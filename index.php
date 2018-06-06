@@ -1,11 +1,12 @@
 <?php 
+  session_set_cookie_params(604800);
   session_start();
 ?>
    <?php include("header.php"); ?>
 
    <?php if (!$logged_in): ?>
        <div class="container">
-
+	<br/>
       <?php if( isset($_SESSION["register"]["message"]) && $_SESSION["register"]["message"] !== ""): ?>
         <div class="alert alert-success">
          <?= $_SESSION["register"]["message"]; ?>
@@ -173,4 +174,4 @@
       </div>
     </div>
   <?php endif; ?>
-   <?php include("footer.php"); ?>
+<?php include("footer.php"); ?>

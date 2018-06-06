@@ -1,4 +1,5 @@
 <?php 
+  header('X-UA-Compatible: IE=edge,chrome=1');
   include("config.php");
   $logged_in = false;
 
@@ -45,7 +46,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#"><img src="img/logo.png" class="logo" /> Pr(emed)onostiek</a>
+        <a class="navbar-brand" href="/"><img src="img/logo.png" class="logo" /> Pr(emed)onostiek</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

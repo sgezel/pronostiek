@@ -1,4 +1,5 @@
 <?php
+session_set_cookie_params(604800);
 session_start();
 if(!isset($_SESSION["data"]["admin"]) && $_SESSION["data"]["admin"]!=true)
 	header("location: /");
@@ -65,11 +66,15 @@ if(!isset($_SESSION["data"]["admin"]) && $_SESSION["data"]["admin"]!=true)
 
           $bonusvragenjuist = [];
 
+          $contestants = "";
+
           foreach($files as $file) {
            if ($file !== "." && $file !== ".."  && file_exists("data/user/" . $file))
            {
             $filename = "data/user/" . $file;
             $userdata =  json_decode(file_get_contents($filename), true);
+
+            $contestants .= str_replace(".json", ";",$file);
 
             if(array_key_exists("vragen", $userdata))
             {
@@ -106,6 +111,7 @@ if(!isset($_SESSION["data"]["admin"]) && $_SESSION["data"]["admin"]!=true)
       }
     }               				
 
+	ksort($vragen);
     ?>
 
     <table border=1>
@@ -134,6 +140,18 @@ if(!isset($_SESSION["data"]["admin"]) && $_SESSION["data"]["admin"]!=true)
 </form>
 </div>
 
+
+
+</div>
+
+<div class="row">
+  <div class="col-lg-12 text-center">
+  	<p class="wit">
+   	<a href="mailto:<?= $contestants;  ?>?subject=Pr(emed)onostiek Update" class="btn btn-warning">Alle deelnemers mailen</a>
+   </p>
+	</div>
+</div>
+
 <div class="row">
   <div class="col-lg-12 text-center">
     <form method="post" action="saveadmin.php">
@@ -142,12 +160,17 @@ if(!isset($_SESSION["data"]["admin"]) && $_SESSION["data"]["admin"]!=true)
       Typ "reset" in het volgende vak: <input type="text" id="verification" name="verification" required />
     </p>
     </form>
-  </form>
+	</div>
+</div>
+
+
+
+
 
 </div>
 
-</div>
-</div>
+
+
 </div>
 <?php endif; ?>
 <?php include("footer.php"); ?>

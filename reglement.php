@@ -3,8 +3,8 @@
 <div class="container">
       <div class="row">
         <div class="col-lg-12">
-
-        	<h1>Reglement der Premedianen voor deelname aan de Pr(emed)onostiek.</h1>
+		<br/>
+        	<h1>Reglement der Premedianen voor deelname aan de <nobr>Pr(emed)onostiek</nobr>.</h1>
         	<div class="wit">
         	<p>
         		<h2>Vorige editie</h2>

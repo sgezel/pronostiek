@@ -1,4 +1,5 @@
 <?php
+	session_set_cookie_params(604800);
 	session_start();
 	
 	if(isset($_POST["username"]) && isset($_POST["password"]))
@@ -25,7 +26,7 @@
 			}
 			else
 			{
-				$_SESSION["register"]["errormessage"] = "Er bestaat reeds een account op die email adres.";
+				$_SESSION["register"]["errormessage"] = "Er bestaat reeds een account op dit email adres.";
 			}
 		}
 	}

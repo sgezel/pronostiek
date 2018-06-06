@@ -16,6 +16,11 @@
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+   <script>
+   $(document).ready(function(){
+      setInterval(function(){ $.get("/keepalive.php"); }, 30000); });
+   </script>
+
   </body>
 
 </html>

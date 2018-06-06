@@ -1,4 +1,5 @@
 <?php
+session_set_cookie_params(604800);
 session_start();
 
 // print_r($_SESSION["data"]);
@@ -20,11 +21,18 @@ foreach ($_POST as $match => $score)
 $_SESSION["data"]["scores"] = $scores;
 $_SESSION["data"]["vragen"] = $vragen;
 
-$filename = "data/user/" .  $_SESSION["user"] . ".json";
+if(isset($_SESSION["user"]) && !empty($_SESSION["user"]))
+{
+	$filename = "data/user/" .  $_SESSION["user"] . ".json";
 
-$fh = fopen($filename, 'w') or die("can't open file");
-$stringData = json_encode($_SESSION["data"]);
-fwrite($fh, $stringData);
-fclose($fh);
+	$fh = fopen($filename, 'w') or die("can't open file");
+	$stringData = json_encode($_SESSION["data"]);
+	fwrite($fh, $stringData);
+	fclose($fh);
+}
+else
+{
+	$_SESSION["login"]["message"] = "Uw Sessie is verlopen. Gelieve opnieuw in te loggen.";
+}
 
 header("location: /");

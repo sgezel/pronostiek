@@ -1,4 +1,5 @@
 <?php
+session_set_cookie_params(604800);
 session_start();
 include("config.php");
 
@@ -155,7 +156,8 @@ else
 						$scoreboard[$userdata["name"]]["punten"] = $total + $bonus;
 						$scoreboard[$userdata["name"]]["score"] = $total;
 						$scoreboard[$userdata["name"]]["bonus"] = $bonus;
-						$scoreboard[$userdata["name"]]["corruitslagen"] = $corruitslagen;
+						$scoreboard[$userdata["name"]]["corruitslagen"] = $corruitslagen;						
+						$scoreboard[$userdata["name"]]["name"] = $userdata["name"];
 
 						$fh = fopen($filename, 'w') or die("can't open file");
 						$stringData = json_encode($userdata);
@@ -165,8 +167,14 @@ else
 					}
 
 				}
-
-				arsort($scoreboard);
+		
+				array_multisort(array_column($scoreboard, 'punten'), SORT_DESC,
+								array_column($scoreboard, 'score'), SORT_DESC,
+								array_column($scoreboard, 'bonus'), SORT_DESC,
+								array_column($scoreboard, 'corruitslagen'), SORT_DESC,
+								array_column($scoreboard, 'name'),      SORT_ASC,
+                $scoreboard);
+				//arsort($scoreboard);
 
 				$fh = fopen("data/scoreboard.json", 'w') or die("can't open file");
 				$stringData = json_encode($scoreboard);
